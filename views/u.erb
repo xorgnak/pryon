@@ -1,0 +1,51 @@
+
+<style>
+#bg { z-index: -10; position: fixed; width: 100vw; height: 100vh; }
+a { text-decoration: none; }
+.btn { padding: 25%; margin: 20% 0 20% 0; border-radius: 5000px; font-size: 100%; background-color: black; }
+#head { width: 100%; margin: 0; }
+#top { margin: 0; font-size: xx-large; }
+#nav { float: right; text-align: right; vertical-align: middle; width: min-content; margin: 0 5% 0 0; z-index: 1; }
+#phone { color: green; }
+#store { color: gold; }
+#social { color: red; }
+#tips { color: pink; }
+#foot { position: fixed; bottom: 0; width: 100%; text-align: center; background-color: black; }
+#work {}
+#job { padding: 1% 2% 1% 2%; }
+#union { padding: 1% 2% 1% 2%; }
+</style>
+
+<% [:user, :chan].each { |e| @db[e].tick(:gp) } %>
+
+<img id='bg' src='<%= @db[:user][:img] || @db[:chan][:img] %>'>
+
+<div id='head'>
+<h1 id='top'>
+<span id='nav'>
+<% { phone: 'phone', store: 'storefront', social: 'auto_awesome', tips: 'savings' }.each_pair do |key,icon|  %>
+<% if "#{@db[:user][key]}".length > 0 %>
+<a class='material-icons btn' id='<%= key %>' href='<%= @db[:user][key] %>'><%= icon %></a>
+<% end %>
+<% end %>
+</span>
+<span id='name'><%= @db[:user][:name] %></span>
+</h1>
+<h2 style='margin: 0;'>serving <%= @db[:user][:city] %> since <%= @db[:user][:since] %>.</h2>
+</div>
+
+
+<div id='foot'>
+<% if "#{@db[:user][:embed]}".length > 0 %>
+<%= @db[:user][:embed] %>
+<% end %>
+
+<div id='work'>
+<% if "#{@db[:user][:job]}".length > 0 %>
+<h2 style='margin: 0;'><span id='job'><%= @db[:user][:job] %></span></h2>
+<% end %>
+<% if "#{@db[:user][:union]}".length > 0 %>
+<h2 style='margin: 0;'><span id='union'><%= @db[:user][:union] %></span></h2>
+<% end %>
+</div>
+</div>

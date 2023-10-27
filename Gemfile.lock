@@ -1,0 +1,51 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    addressable (2.8.5)
+      public_suffix (>= 2.0.2, < 6.0)
+    base64 (0.1.1)
+    coderay (1.1.3)
+    faraday (2.7.11)
+      base64
+      faraday-net_http (>= 2.0, < 3.1)
+      ruby2_keywords (>= 0.0.4)
+    faraday-multipart (1.0.4)
+      multipart-post (~> 2)
+    faraday-net_http (3.0.2)
+    hugging-face (0.3.4)
+      faraday (>= 1.0)
+    json (2.6.3)
+    method_source (1.0.0)
+    multipart-post (2.3.0)
+    paho-mqtt (1.0.12)
+    pry (0.14.2)
+      coderay (~> 1.1)
+      method_source (~> 1.0)
+    pstore (0.1.2)
+    public_suffix (5.0.3)
+    qdrant-ruby (0.9.4)
+      faraday (>= 2.0.1, < 3)
+    ruby-openai (5.1.0)
+      faraday (>= 1)
+      faraday-multipart (>= 1)
+    ruby2_keywords (0.0.5)
+    vlc-client (0.0.7)
+    wikipedia-client (1.17.0)
+      addressable (~> 2.7)
+
+PLATFORMS
+  armv7l-linux-eabihf
+
+DEPENDENCIES
+  hugging-face
+  json
+  paho-mqtt
+  pry
+  pstore
+  qdrant-ruby
+  ruby-openai
+  vlc-client
+  wikipedia-client
+
+BUNDLED WITH
+   2.5.0.dev

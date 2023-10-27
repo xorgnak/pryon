@@ -1,0 +1,33 @@
+<% @color = ['white', 'yellow', 'red', 'blue', 'green', 'gold'] %>
+<% @icon = ['radio_button_unchecked', 'circle', 'radio_button_checked', 'star_outline', 'star', 'stars'] %>
+<% @c = @color["#{@db[:user][:xp].to_i}".length - 1] %>
+<style>
+#logo { color: <%= @c %>; border: thick solid <%= @c %>; }
+#foot { border-left: 20px solid <%= @c %>; border-right: 20px solid <%= @c %>; }
+</style>
+
+<h1 style='margin: 0; padding: 0; text-align: center;'>
+<span id='logo' class='material-icons'><%= @icon[@db[:user][:lvl]] %></span>
+<span><%= @db[:user][:name] %></span>
+<span id='logo' class='material-icons'><%= @icon[@db[:user][:lvl]] %></span>
+</h1>
+
+<div id='qrcode-wrapper' style='width: 100%; text-align: center; z-index: -1; background-color: white; padding: 5% 0 5% 0;'>
+<div id='qrcode'></div>
+</div>
+
+<div style='width: 100%; text-align: center; position: fixed; bottom: 0; z-index: 100;'>
+
+<div id='foot'>
+<% if "#{@db[:user][:job]}".length > 0 %>
+<h2 style='text-align: center; width: 100%; margin: 0;'><span><%= @db[:user][:job] %></span></h2>
+<% end %>
+
+<% if "#{@db[:user][:union]}".length > 0 %>
+<h2 style='text-align: center; width: 100%; margin: 0;'><span><%= @db[:user][:union] %></span></h2>
+<% end %>
+</div>
+</div>
+<script>
+$('#qrcode').qrcode("https://propedicab.com/u?user=<%= @params['user'] %>&chan=<%= @params['chan'] %>");
+</script>

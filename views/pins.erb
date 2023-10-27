@@ -1,0 +1,6 @@
+
+<h1 style='width: 100%; text-align: center'>
+<% { star: 'star', place: 'location', flag: 'flag', favorite: 'favorite' }.each_pair do |k,v| %>
+<button class='material-icons pin' value='<%= v %>'><%= k %></button>
+<% end %>
+</h1>

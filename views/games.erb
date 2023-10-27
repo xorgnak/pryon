@@ -1,0 +1,64 @@
+<style>
+.pill { margin: 0 2% 0 2%; }
+.btn { text-decoration: none; color: white; border: thick outset grey; padding: 0 2% 0 2%; margin: 0 1% 0 1%; }
+</style>
+
+<% @icons = {
+played: "punch_clock",
+wins: "mood",
+losses: "mood_bad",
+turns: "refresh",
+points: 'toll',
+avg: 'percent',
+pts: 'timeline',
+exit: 'close'
+} %>
+
+<% if "#{@db[:user][:game]}".length > 0 %>
+<div style='width: 100%; text-align: center; border: thin solid white;'>
+<h1>
+<span><%= @db[:user][:game] %></span>
+</h1>
+<h1 style='width: 100%; text-align: center;'>
+<% [ :points, :turns, :losses, :exit ].each do |e| %>
+<a class='material-icons btn' href='/game?act=<%= e %>&user=<%= params[:user] %>&chan=<%= params[:chan] %>'><%= @icons[e] %></a>
+<% end %>
+</h1>
+<h4 style='width: 100%; text-align: center;'>
+<% @g = Z4[:game, @db[:user][:game]]; %>
+<% [ :points, :turns, :wins, :losses ].each do |e| %>
+<span class='pill' style='font-size: medium;'>
+<span class='material-icons key' style='font-size: medium;'><%= @icons[e] %></span>
+<span class='value'><%= @g[e].to_i %></span>
+</span>
+<% end %>
+</h4>
+</div>
+<% else %>
+<% [:user].each do |e| %>
+<% @x = @db[e] %>
+<% if @db[e][:games] != nil %>
+<% @db[e][:games].each do |g| %>
+<% @g = Z4[:game, g]; %>
+<% @g[:avg] = ((@g[:games].to_i + 1) / (@g[:wins].to_i + 1) - 1) %>
+<% @g[:pts] = ((@g[:points].to_i + 1) / (@g[:turns].to_i + 1) - 1) %>
+<div style='border: thin solid white;'>
+<h3 style='width: 100%; text-align: center;'>
+<a class='btn' href='/game?act=quit&user=<%= params[:user] %>&chan=<%= params[:chan] %>&game=<%= g %>'>
+<%= g %>
+</a>
+</h3>
+<h4 style='width: 100%; text-align: center;'>
+<% [ :points, :turns, :wins, :losses ].each do |e| %>
+<span class='pill' style='font-size: medium;'>
+<span class='material-icons key' style='font-size: medium;'><%= @icons[e] %></span>
+<span class='value'><%= @g[e].to_i %></span>
+</span>
+<% end %>
+</h4>
+<!-- <p style='width: 100%; text-align: center'><code style='width: 100%; text-align: center;'><%= g %></code></p> -->
+</div>
+<% end %>
+<% end %>
+<% end %>
+<% end %>

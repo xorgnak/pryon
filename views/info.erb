@@ -1,0 +1,11 @@
+<style>
+p { font-size: large; }
+</style>
+<% @here = Z4.here[params[:here]] %>
+<h1 style='width: 100%; text-align: center; margin: 0; background-color: white; color: black;'>
+<span class='material-icons'>place</span><%= @here[:grid] %>
+</h1>
+
+<% @here[:info].each do |e| %>
+<p><span class='material-icons'>info</span><%= e %></p>
+<% end %>

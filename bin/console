@@ -1,0 +1,9 @@
+
+#require 'irb'
+#require 'irb/completion'
+require 'pry'
+
+load 'lib/pryon.rb'
+
+#IRB.start
+Pry.start

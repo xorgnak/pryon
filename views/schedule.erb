@@ -1,0 +1,10 @@
+<style>
+p { width: max-content; text-align: center; margin: 0; }
+code { width: 100%; }
+div { width: 100%; text-align: center; overflow: scroll; }
+</style>
+<div>
+<% @db[:user].cal.schedule.each do |e| %>
+<p><code><%= e.gsub(" ","&nbsp;") %></code></p>
+<% end %>
+</div>

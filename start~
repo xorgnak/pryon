@@ -1,0 +1,38 @@
+#!/bin/bash
+
+# video streaming server.  makes anything played through the vlc server over http
+cvlc --extraintf rc --rc-host 127.0.0.1:9595 \
+     :sout=#transcode{vcodec=h264,acodec=mpga,ab=128,channels=2,samplerate=44100,scodec=none}:duplicate{dst=http{dst=:8080/stream.mp4},dst=display} :no-sout-all :sout-keep &
+
+echo "###### [zeefour][sanity]"
+
+for d in bootstrap books calendars usr z4 lib bin views public media
+do
+    mkdir -p $d;
+done
+
+for d in bootstrap books calendars usr z4 lib bin views public media
+do
+    rm $d/*~ > /dev/null 1>&1
+    rm $d/#* > /dev/null 2>&1
+    rm $d/*# > /dev/null 2>&1
+done
+
+echo "###### [zeefour][release]"
+
+source release.sh
+
+echo "###### [zeefour][bootstrap]"
+
+if [[ "$1" == "bootstrap" ]]; then
+   for f in bootstrap/*.sh
+   do
+       
+     chmod +x $f;
+     ./$f;
+   done
+fi
+
+echo "###### [zeefour][console]"
+
+ruby bin/console
