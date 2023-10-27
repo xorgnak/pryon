@@ -23,7 +23,7 @@ a { text-decoration: none; }
 <div id='head'>
 <h1 id='top'>
 <span id='nav'>
-<% { discord: 'customer_service', phone: 'phone', store: 'storefront', social: 'auto_awesome', tips: 'savings' }.each_pair do |key,icon|  %>
+<% { discord: 'support_agent', phone: 'ring_volume', store: 'local_grocery_store', social: 'follow_the_signs', tips: 'savings' }.each_pair do |key,icon|  %>
 <% if "#{@db[:user][key]}".length > 0 %>
 <a class='material-icons btn' id='<%= key %>' href='<%= @db[:user][key] %>'><%= icon %></a>
 <% end %>
