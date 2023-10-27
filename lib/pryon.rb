@@ -735,7 +735,7 @@ BOT.command(:'i', usage: "#my [<key> <value>] [@user...]", description: "Use thi
   end
   
   # navagator
-  o << %[--[NAVAGATOR] https://#{u[:host]}/menu?user=#{h[:user]}&chan=#{h[:chan]}]
+  o << %[--[NAVAGATOR] https://#{u[:host] || ENV['BRAND']}/menu?user=#{h[:user]}&chan=#{h[:chan]}]
   e.respond(%[#{o.join("\n")}])
 end
 
