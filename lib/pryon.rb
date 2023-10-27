@@ -699,7 +699,7 @@ end
 
 # introspection & user settings & mention peek
 BOT.command(:'i', usage: "#my [<key> <value>] [@user...]", description: "Use this.") do |e|
-  o = []
+  o = [%[--[[NODE]] #{ENV['COHORT']}/#{ENV['NODE']}]]
   h = BOT.event(e)
   u = Z4[:user, h[:user]]
   [ :chan, :channel, :nick, :lvl ].each { |e| u[e] = h[e] }

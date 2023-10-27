@@ -1,37 +1,54 @@
 #!/bin/bash
 
+dirs=('bootstrap' 'books' 'calendars' 'usr' 'z4' 'lib' 'bin' 'views' 'public' 'media' 'db');
+_i='PryOn';
+
+function sec() {
+    echo "###### [$_i][$1]";
+}
+function log() {
+    echo -e "#----- [$_i][$1] $2";
+}
+
+
+source release.sh
+
+source env.sh
+
+sec 'vlc'
+
+log 'vlc' 'beginning stream'
 # video streaming server.  makes anything played through the vlc server over http
-cvlc --extraintf rc --rc-host 127.0.0.1:9595 \
-     :sout=#transcode{vcodec=h264,acodec=mpga,ab=128,channels=2,samplerate=44100,scodec=none}:duplicate{dst=http{dst=:8080/stream.mp4},dst=display} :no-sout-all :sout-keep &
+cvlc --extraintf rc --rc-host 127.0.0.1:9595 $Z4_VLC_STREAM &
+log 'vlc' 'stream available'
 
-echo "###### [zeefour][sanity]"
 
-for d in bootstrap books calendars usr z4 lib bin views public media
+sec 'sanity'
+log 'sanity' 'creating directories'
+for d in $dirs
 do
    mkdir -p $d  
 done
-
-for d in bootstrap books calendars usr z4 lib bin views public media
+log 'sanity' 'directories created'
+for d in $dirs
 do
     rm $d/*~ > /dev/null 1>&1
     rm $d/#* > /dev/null 2>&1
     rm $d/*# > /dev/null 2>&1
 done
 
-echo "###### [zeefour][release]"
-
-source release.sh
-
-echo "###### [zeefour][bootstrap]"
+sec 'bootstrap'
 
 if [[ "$1" == "bootstrap" ]]; then
+    log 'bootstrap' 'beginning...'
    for f in bootstrap/*.sh
    do       
      chmod +x $f;
      ./$f;
    done
+   log 'bootstrap' 'ready!'
 fi
 
-echo "###### [zeefour][console]"
+sec 'console'
 
 ruby bin/console
