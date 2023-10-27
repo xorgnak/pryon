@@ -23,25 +23,22 @@ require 'wikipedia-client'
 # llm wrapper
 #require 'langchain'
 # vector search db
-require 'qdrant'
+#require 'qdrant'
 # ai llm
-require 'openai'
+#require 'openai'
 # ai llm
 #require 'cohere'
 # web ui
 require 'sinatra/base'
 # ai llm 
 require 'hugging_face'
-
 require 'faraday'
-
 require 'vlc-client'
 
 # LLM wrapper C -> "see"
 class C
   def initialize i
     @id = i
-    @openai = OpenAI::Client.new(api_key: ENV['Z4_OPENAI_KEY'])
     @face = HuggingFace::InferenceApi.new(api_token: ENV['HUGGING_FACE_API_TOKEN'])
   end
   def prompt h={}, *w
@@ -126,9 +123,6 @@ class C
   end
   def embed *t
     @face.embedding(input: [t].flatten)
-  end
-  def openai
-    @openai
   end
 end
 
