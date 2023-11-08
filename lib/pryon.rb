@@ -709,7 +709,7 @@ class APP < Sinatra::Base
     end
     
     @db.each_pair { |k,v| hh[k] = v.to_h }
-    puts %[POST #{hh}]
+    puts %[POST #{hh[:grid]}]
     return JSON.generate(hh)
   }
 end

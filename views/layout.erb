@@ -180,8 +180,9 @@ if (!navigator.geolocation) {
     function gps_success(p) {
 	$('#items').append("<p>" + p.latitude + ", " + p.longitude + "</p>");
       	$.post('/', { lat: p.latitude, lon: p.longitude, user: params.user, chan: params.chan }, function(data){
-               $('#locator').text(data.grid);
-	       $('#items').append('<code>' + data + '</code>');
+	    j = JSON.parse(data);
+               $('#grid').text(j.grid);
+	       //$('#items').append('<code>' + data + '</code>');
 	});
 }
 function gps_error() {  $('#items').append('<p>[GPS] something went wrong.</p>'); }
