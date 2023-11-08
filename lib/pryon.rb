@@ -1593,7 +1593,7 @@ module Z4;
   
   # gps -> gridsquare
   def self.to_grid(lat,lon)
-    Maidenhead.to_maidenhead(lat,lon,5)
+    Maidenhead.to_maidenhead(lat,lon,4)
   end
   # gridsquare -> gps
   def self.to_gps(m)
