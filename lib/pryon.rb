@@ -704,11 +704,12 @@ class APP < Sinatra::Base
       @db[:user][:lat] = params[:lat]
       @db[:user][:lon] = params[:lon]
       @db[:user][:grid] = Z4.to_grid(params[:lat],params[:lon])
-      @db[:grid] = Z4[:grid, @db[:user][:grid]]
-      hh[:locator] = @db[:user][:grid]
+      @db[:grid] = Z4[:grid, @db[:user][:grid]].to_h
+      hh[:grid] = @db[:user][:grid]
     end
     
     @db.each_pair { |k,v| hh[k] = v.to_h }
+    puts %[POST #{hh}]
     return JSON.generate(hh)
   }
 end
