@@ -1,0 +1,56 @@
+# coding: utf-8
+project acso "Accounting Software"  2002-01-16 +4m {
+  # Pick a day during the project that will be reported as 'today' in
+  # the project reports. If not specified, the current day will be
+  # used, but this will likely be outside of the project range, so it
+  # can't be seen in the reports.
+  now 2002-03-05-13:00
+
+  # The date that is used to show additional line on a Gannt chart
+  # and can be specified by the user.
+  markdate 2002-08-07-03:00
+  
+  # The currency for all money values is the Euro.
+  currency "USD"
+
+  scenario plan "Plan" {
+    scenario delayed "Delayed"
+  }
+  extend resource {
+    text Phone "Phone"
+  }
+}
+
+flags team
+
+account cost "Project Cost" {
+  account dev "Development"
+  account doc "Documentation"
+}
+
+account rev "Payments"
+
+balance cost rev
+
+resource boss "Paul Henry Bullock" {
+  email "phb@crappysoftware.com"
+  Phone "x100"
+  rate 480
+}
+
+resource dev1 "Paul Smith" {
+  email "paul@crappysoftware.com"
+  Phone "x362"
+  rate 350.0
+}
+
+resource dev2 "Sébastien Bono" {
+  email "SBono@crappysoftware.com"
+  Phone "x234"
+}
+
+resource dev3 "Klaus Müller" {
+  email "Klaus.Mueller@crappysoftware.com"
+  Phone "x490"
+  leaves annual 2002-02-01 - 2002-02-05
+}

@@ -1,28 +1,50 @@
 
-<div style='width: 100%; text-align: center; margin: 0; padding: 0;'>
-<h2 style='width: 100%; text-align: center;'>SCHOOL</h2>
+<h3 style='color: gold;'>1: Settings</h3>
+<p>These settings effect items in your referral card.  They may or may not be displayed.</p>
+<ul>
+<li>name: Your name.</li>
+<li>dob: Your date of birth.</li>
+<li>age: Your age.</li>
+<li>city: Your city.</li>
+<li>since: Your start year.</li>
+<li>job: Your job.</li>
+<li>team: Your job team.</li>
+<li>union: Your local union.</li>
+</ul>
+<p>These settings effect clickable links within the referral card.</p>
+<ul>
+<li>discord: Your discord server invite link.</li>
+<li>phone: Your formatted call or sms link.</li>
+<li>social: Your social media profile.</li>
+<li>store: Your webstore.</li>
+<li>tips: Your social tipping link.</li>
+</ul>
+<p>These settings are special.</p>
+<ul>
+<li>img: Sets the backround image of the referral card.  May be animated.</li>
+<li>embed: An embed script to render content within the referral card.</li>
+<li>thanks: An embed script to render content within the thanks card.</li>
+</ul>
 
-<p style='width: 100%; text-align: center;'>Complete the reading and viewing for each section, then pass the test at the end to gain skills and certifications.</p>
-</div>
+<h3 style='color: gold;'>2: Embeds</h3>
+<p>Embeds are used to generate content within a route.</p>
+<ul>
+<li>runtime(object): Access an object which will be available at runtime.</li>
+<li>input(name): Add a text input.</li>
+<li>email(name): Add an email input.</li>
+<li>url(name): Add a url input.</li>
+<li>tel(name): Add a telephone number input.</li>
+<li>textarea(name, placeholder: placeholder text, value: default vaule text): Add a textarea.</li>
+<li>color(name): Add a color selector.</li>
+<li>date(name): Add a date selector.</li>
+<li>time(name): Add a time selector.</li>
+<li>radio(name): Add a radio button.</li>
+<li>check(name): Add a checkbox.</li>
+<li>select(name, *values): Add a select input.</li>
+<li>number(name, min: min value, max: max value, value: default value): Add a number input.</li>
+<li>text(text): Add the given text to the form.</li>
+<li>goto(route, params={}): Set the route to redirect to after the form is posted.</li>
+<li>submit(text): Add a form submit button with the given text.</li>
+<li>stack(target, category): Set the category within the target for the record to be stored.</li>
+</ul>
 
-
-<h3 style='color: gold;'>1: Web UI Basics</h3>
-<p>1.a. <a href='/school_html'>html</a></p>
-<p>1.b. <a href='/school_css'>css</a></p>
-<p>1.c. <a href='/school_js'>javascript</a></p>
-
-<h3 style='color: gold;'>2: Templating</h3>
-<p>2.a. <a href='/school_ruby'>ruby</a></p>
-<p>2.b. <a href='/school_erb'>erb</a></p>
-<p>2.c. <a href='/school_z4_templates'>z4 templates</a></p>
-
-<h3 style='color: gold;'>3: Z4</h3>
-<p>3.a. <a href='/school_z4_tables'>tables</a></p>
-<p>3.b. <a href='/school_z4_services'>services</a></p>
-<p>3.c. <a href='/school_z4_handlers'>handlers</a></p>
-<p>3.d. <a href='/school_z4_setup'>setup</a></p>
-
-<h3 style='color: gold;'>4: nomad</h3>
-<p>4.a. <a href='/school_nomad_install'>installation</a></p>
-<p>4.b. <a href='/school_configuration'>configuration</a></p>
-<p>4.c. <a href='/school_usage'>usage</a></p>

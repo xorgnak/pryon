@@ -5,5 +5,14 @@ require 'pry'
 
 load 'lib/pryon.rb'
 
+here = HERE
+here.init!
 #IRB.start
-Pry.start
+Pry.start(here)
+#          , :prompt => Pry::Prompt.new(	
+#                     "custom",	   
+#                     "my custom	prompt",
+#	             [ proc { "#{ENV['USER']}@#{`hostname`.strip}/#{Dir.pwd}> " },
+#                       proc { "> " }]
+#	           )
+#         )

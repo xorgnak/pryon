@@ -1,0 +1,5 @@
+require 'pry'
+
+load 'lib/root.rb'
+
+Pry.start

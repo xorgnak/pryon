@@ -19,6 +19,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+<% if params.has_key?(:user) && params.has_key?(:chan) %>
+<link rel="manifest" href="/manifest.webmanifest?user=<%= params[:user] %>&chan=<%= params[:chan] %>&route=<%= request.path.gsub('/','') %>" />
+<% end %>
+
 <style>
 
 .material-icons { vertical-align: middle; }
@@ -44,6 +48,8 @@ body { padding: 0; margin: 0; width: 100%; height: 100%; }
 .wall { background-color: black; color: gold; border: thin solid grey; }
 
 .menu { text-decoration: none; border: thin outset white; border-radius: 5px; padding: 0 1% 0 1%; color: white; }
+
+.e { width: 100%; text-align: center; }
 
 </style>
 
@@ -173,10 +179,10 @@ if (!navigator.geolocation) {
     $('.gps').show();
     function gps_success(p) {
 	$('#items').append("<p>" + p.latitude + ", " + p.longitude + "</p>");
-      	$.post('/', { lat: p.latitude, lon: p.longitude, user: params.user, chan: params.chan }, function(data) 
+      	$.post('/', { lat: p.latitude, lon: p.longitude, user: params.user, chan: params.chan }, function(data){
                $('#locator').text(data.grid);
 	       $('#items').append('<code>' + data + '</code>');
-	      });
+	});
 }
 function gps_error() {  $('#items').append('<p>[GPS] something went wrong.</p>'); }
 const gps_options = { enableHighAccuracy: true, maximumAge: 5000, timeout: 5000 };
@@ -187,7 +193,7 @@ watchID = navigator.geolocation.watchPosition(gps_success, gps_error, gps_option
     
 </head>
 <body>
-<form method='GET' action='<%= request.path %>'>
+<form method='POST' action='<%= request.path %>'>
 <%= yield %>
 </form>
 </body>

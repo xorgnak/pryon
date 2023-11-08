@@ -1,0 +1,64 @@
+This is the main application. It reads in your project files, schedules the
+project and generates the reports.
+
+Copyright (c) 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020
+              by Chris Schlaeger <cs@taskjuggler.org>
+
+This program is free software; you can redistribute it and/or modify it under
+the terms of version 2 of the GNU General Public License as published by the
+Free Software Foundation.
+
+For more info about TaskJuggler see http://www.taskjuggler.org
+
+Usage: tj3 [options] 
+
+
+Options:
+         --config <FILE>    Use the specified YAML configuration file
+         --silent           Don't show program and progress information
+         --no-color         Don't use ANSI contol sequences to color the
+                            terminal output. Colors should only be used when
+                            spooling to an ANSI terminal. In case the detection
+                            fails, you can use this option to force colors to
+                            be off.
+         --debug            Enable Ruby debug mode
+         --debuglevel N     Verbosity of debug output
+         --debugmodules x,y,z
+                            Restrict debug output to a list of modules
+         --freeze           Generate or update the booking file for the
+                            project. The file will have the same base name as
+                            the project file but has a -bookings.tji extension.
+         --freezedate <date>
+                            Use a different date than the current momentas
+                            cut-off date for the booking file
+         --freezebytask     Group the bookings in the booking file generated
+                            during a freeze by task instead of by resource.
+         --check-time-sheet <tji-file>
+                            Check the given time sheet
+         --check-status-sheet <tji-file>
+                            Check the given status sheet
+         --warn-ts-deltas   Turn on warnings for requested changes in time
+                            sheets
+         --check-syntax     Only parse the input files and check the syntax.
+         --no-reports       Just schedule the project, but don't generate any
+                            reports.
+         --list-reports <report ID regular expression>
+                            List id, formats and file name of all the defined
+                            reports that have IDs that match the specified
+                            regular expression.
+         --report <report ID>
+                            Only generate the report with the specified ID.
+                            This option can be used multiple times.
+         --reports <report ID regular expression>
+                            Only generate the reports that have IDs that match
+                            the specified regular expression. This option can
+                            be used multiple times.
+     -f, --force-reports    Generate reports despite scheduling errors
+         --add-trace        Append a current data set to all trace reports.
+         --abort-on-warnings
+                            Abort program on warnings like we do on errors.
+     -o <directory>,        Directory the reports should go into
+         --output-dir
+     -c N                   Maximum number of CPU cores to use
+     -h, --help             Show this message
+         --version          Show version info

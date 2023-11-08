@@ -1,7 +1,18 @@
 #!/bin/bash
 
-dirs=('bootstrap' 'books' 'calendars' 'usr' 'z4' 'lib' 'bin' 'views' 'public' 'media' 'db');
+
+# cosmetics.
+rm *~
+rm \#*
+rm *\#
+
+
+dirs=('bootstrap' 'books' 'calendars' 'usr' 'z4' 'lib' 'bin' 'views' 'public' 'media' 'db' 'ledger' 'records');
 _i='PryOn';
+
+Z4_VLC_RPC="--extraintf rc --rc-host 127.0.0.1:9595";
+
+Z4_VLC_STREAM=":screen-fps=30 :screen-caching=100 --sout '#transcode{vcodec=mp4v,vb=4096,acodec=mpga,ab=256,scale=1,width=1024,height=768‌​}:standard{access=http, mux=ts, dst=:8080}'"
 
 function sec() {
     echo "###### [$_i][$1]";
@@ -19,7 +30,7 @@ sec 'vlc'
 
 log 'vlc' 'beginning stream'
 # video streaming server.  makes anything played through the vlc server over http
-cvlc --extraintf rc --rc-host 127.0.0.1:9595 $Z4_VLC_STREAM &
+cvlc $Z4_VLC_RPC $Z4_VLC_STREAM &
 log 'vlc' 'stream available'
 
 
@@ -29,6 +40,7 @@ for d in $dirs
 do
    mkdir -p $d  
 done
+
 log 'sanity' 'directories created'
 for d in $dirs
 do
@@ -48,6 +60,10 @@ if [[ "$1" == "bootstrap" ]]; then
    done
    log 'bootstrap' 'ready!'
 fi
+
+sec 'rake'
+
+rake
 
 sec 'console'
 

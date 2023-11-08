@@ -37,7 +37,7 @@ a { text-decoration: none; }
 
 <div id='foot'>
 <% if "#{@db[:user][:embed]}".length > 0 %>
-<%= @db[:user][:embed] %>
+<%= Embed.new(@db[:user][:embed]).result(params) %>
 <% end %>
 
 <div id='work'>

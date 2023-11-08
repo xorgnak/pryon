@@ -1,26 +1,14 @@
-<% if @db[:host][:css] %>
 <style>
-<%= @db[:host][:css] %>
+a { text-decoration: none; color: white; border: thin outset grey; padding: 1%; }
 </style>
-<% end %>
 
-<% if @db[:host][:img] %>
-<img src='<%= @db[:host][:img] %>' style='width: 100%; height: 100%; z-index: -1; position: fixed; top: 0; left: 0;'>
-<% end %>
+<%= erb :img %>
 
-<h1 id='heading' style='width: 100%; text-align: center;'>
-<button id='menu' class='material-icons' value='<%= @db[:host][:nav] %>'>menu</button>
-<span style='width: 70%; display: inline-block;'>
-<% if @db[:host][:heading] %>
-<%= @db[:host][:heading] %>
-<% end %>
-</span>
-<button id='chat' class='material-icons' value='<%= @db[:host][:social]  %>'>support_agent</button>
-</h1>
+<%= erb :heading %>
 
-<% if @db[:host][:body] %>
+<% if @db[:host][:embed] %>
 <div id='body' style='width: 100%; text-align: center;'>
-<%= @db[:host][:body] %>
+<%= Embed.new(@db[:host][:embed]).result(params) %>
 </div>
 <% end %>
 

@@ -1,0 +1,12 @@
+<style>
+a { text-decoration: none; color: white; border: thin outset grey; padding: 1%; }
+</style>
+
+<%= erb :img %>
+
+<%= erb :heading %>
+
+<% @user = @db[:user].index %>
+<% @chan = @db[:chan].index %>
+
+<%= Embed.new(@db[:user][:thanks] || %[text('Thanks.')]).result(params) %>
