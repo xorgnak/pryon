@@ -181,6 +181,7 @@ if (!navigator.geolocation) {
 	$('#items').append("<p>" + p.coords.latitude + ", " + p.coords.longitude + "</p>");
       	$.post('/', { lat: p.coords.latitude, lon: p.coords.longitude, user: params.user, chan: params.chan }, function(data){
 	    j = JSON.parse(data);
+	    $('#items').append(data);
                $('#grid').text(j.grid);
 	});
 }
