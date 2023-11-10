@@ -1833,29 +1833,29 @@ else
 end
 
 # load host fixed calendars
-#Dir['calendars/*.txt'].each { |e|
-#  key = e.gsub('calendars/','').gsub('.txt','').to_sym
-#  puts "[CALENDAR] #{key}"
-#  file = File.read(e)
-#  file.split("\n").each {|line|
-#    @host.each_pair { |k,v|
-#      #puts %[[CALENDAR] #{key} => #{line}];
-#      l = line.split(" ")
-#      kk = l[0..1].join(" ")
-#      vv = l[2..-1].join(" ")
+Dir['calendars/*.txt'].each { |e|
+  key = e.gsub('calendars/','').gsub('.txt','').to_sym
+  puts "[CALENDAR] #{key}"
+  file = File.read(e)
+  file.split("\n").each {|line|
+    @host.each_pair { |k,v|
+      #puts %[[CALENDAR] #{key} => #{line}];
+      l = line.split(" ")
+      kk = l[0..1].join(" ")
+      vv = l[2..-1].join(" ")
       #puts %[[#{k}]kv: |#{kk}| |#{vv}|]
-#      if m = BOT.calendar(kk.split(" "))
-#        puts %[[#{k}]m: #{m}]
-#        puts %[[#{k}]kv: |#{kk}|#{key} #{vv}|]
-#        puts %[[#{k}]cal: #{BOT.calendar(kk)}]
-#        puts %[[#{k}]dt: #{Z4.datetime(kk)}]
-#        CAL[k][Z4.datetime(kk).strftime('%Y.%m.%dT%H:%M')][key] = vv
-#        Z4[:host, k].remind Z4.datetime(kk).strftime('%Y/%m/%d %H:%M'), %[#{key} #{vv}]
-#      end
-#      v.add(key, line, :uniq);
-#    }
-#  }
-#}
+      if m = BOT.calendar(kk.split(" "))
+        puts %[[#{k}]m: #{m}]
+        puts %[[#{k}]kv: |#{kk}|#{key} #{vv}|]
+        puts %[[#{k}]cal: #{BOT.calendar(kk)}]
+        puts %[[#{k}]dt: #{Z4.datetime(kk)}]
+        CAL[k][Z4.datetime(kk).strftime('%Y.%m.%dT%H:%M')][key] = vv
+        Z4[:host, k].remind Z4.datetime(kk).strftime('%Y/%m/%d %H:%M'), %[#{key} #{vv}]
+      end
+      v.add(key, line, :uniq);
+    }
+  }
+}
 
 #CAL.each_pair { |k,v| File.open("reminders/host-#{k}.rem", 'w') { |f| f.write(v.to_rem.join("\n") + %[\n]) } }
 
