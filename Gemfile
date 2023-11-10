@@ -21,7 +21,7 @@ gem 'wikipedia-client'
 gem 'vlc-client'
 
 
-gem "taskjuggler", "~> 3.7"
+#gem "taskjuggler", "~> 3.7"
 
 gem "net-protocol", "~> 0.2.1"
 
