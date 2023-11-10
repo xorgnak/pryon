@@ -656,7 +656,8 @@ class APP < Sinatra::Base
     set :views, 'views/'
   end
   # handle dumb shit
-  ['favicon.ico'].each { |e| get("/#{e}") {}}
+  ['robots.txt', 'favicon.ico'].each { |e| get("/#{e}") {}}
+  
   # manifest
   get('/manifest.webmanifest') {
     content_type 'application/manifest+json'
@@ -668,6 +669,7 @@ class APP < Sinatra::Base
     }
     return JSON.generate(h)
   }
+  
   get('/service-worker.js') {
     content_type 'application/javascript'
     erb :service_worker, layout: false
@@ -678,17 +680,20 @@ class APP < Sinatra::Base
     @db = { host: Z4[:host, request.host] }
     erb :index
   }
+  
   # routes
   get('/:view') {
     @db = { host: Z4[:host, request.host] }
     [:user, :chan, :net, :dev].each { |e| if params.has_key?(e); @db[e.to_sym] = Z4[e.to_sym, params[e]]; end  }
     erb params[:view].to_sym
   }
+  
   # /object/item -> json
   get('/:o/:i') {
     content_type "application/json"
     JSON.generate(Z4[params[:o].to_sym, params[:i]].to_h)
   }
+  
   post('/:view') {
     @db = { host: Z4[:host, request.host] }
     [:user, :chan, :net, :dev].each { |e| if params.has_key?(e); @db[e.to_sym] = Z4[e.to_sym, params[e]]; end  }
@@ -701,6 +706,7 @@ class APP < Sinatra::Base
       erb params[:view].to_sym
     end
   }
+  
   # handle post
   post('/') {
     @db = { host: Z4[:host, request.host] }

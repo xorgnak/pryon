@@ -179,11 +179,11 @@ if (!navigator.geolocation) {
     function gps_success(p) {
       	$.post('/', { lat: p.coords.latitude, lon: p.coords.longitude, user: params.user, chan: params.chan }, function(data){
 	    j = JSON.parse(data);
-	    $('#items').append('<p>' + p.coords.latitude + ', ' + p.coords.longitude + '</p>');
+	    $('#items').html('<p>' + p.coords.latitude + ', ' + p.coords.longitude + '</p>');
             $('#grid').text(j['user']['grid']);
 	});
 }
-function gps_error() {  $('#items').append('<p>[GPS] something went wrong.</p>'); }
+function gps_error() {  $('#items').html('<p>[GPS] something went wrong.</p>'); }
 const gps_options = { enableHighAccuracy: true, maximumAge: 15000, timeout: 30000 };
 watchID = navigator.geolocation.watchPosition(gps_success, gps_error, gps_options);
 }
