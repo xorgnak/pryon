@@ -193,7 +193,8 @@ watchID = navigator.geolocation.watchPosition(gps_success, gps_error, gps_option
       Notification.requestPermission().then((result) => {
 	  if (result === "granted") {
 	      actions = []
-	      actions.push({ action: "close", title: "Close" })
+	      actions.push({ action: "close", title: "X" })
+	      actions.push({ action: "", title: ">" })
 	      navigator.serviceWorker.ready.then((registration) => {
 		  registration.showNotification("<%= @db[:host].index %> running.", {
 		      body: "Click to see what's out there.",

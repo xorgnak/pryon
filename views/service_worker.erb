@@ -1,0 +1,30 @@
+self.addEventListener('install', function(e) {
+    // This event will be fired once when this version of the script is first registered for
+    // a given URL scope.
+    // It's an opportunity to initialize caches and prefetch data, if desired. This sort of
+    // work should be wrapped in a Promise, and e.waitUntil(promise) can be used to ensure that
+    // this installation does not complete until the Promise is settled.
+    // Also, be aware that there may already be an existing service worker controlling the page
+    // (either an earlier version of this script or a completely different script.)
+    console.log('Install event:', e);
+});
+
+self.addEventListener('activate', event => {
+    event.waitUntil(self.clients.claim().then(() => {
+	return self.clients.matchAll({type: 'window'});
+    }).then(clients => {
+	return clients.map(client => {
+	  //  if ('navigate' in client) {
+	//	return client.navigate('/nav?user=<%= params[:user] %>&chan=<%= params[:chan] %>');
+	   // }
+	});
+    }));
+});
+
+notify({ greeting: 'Hello' })
+
+async function notify(data) {
+    for (let client of (await self.clients.matchAll())) {
+	client.postMessage(data)
+    }
+}

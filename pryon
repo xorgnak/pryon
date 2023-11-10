@@ -1,5 +1,6 @@
 #!/bin/bash
 
+set -m
 
 # cosmetics.
 rm *~
@@ -25,6 +26,13 @@ function log() {
 source release.sh
 
 source env.sh
+
+sec 'tunnel'
+
+if [[ "$Z4_NGROK_DOMAIN" != "" ]]; then
+    `ngrok http --domain=$Z4_NGROK_DOMAIN 80 &` &
+    log 'tunnel' 'established.'
+fi
 
 sec 'vlc'
 

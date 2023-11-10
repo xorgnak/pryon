@@ -6,9 +6,9 @@ a { text-decoration: none; color: white; border: thin outset grey; padding: 1%; 
 
 <%= erb :heading %>
 
-<% if @db[:host][:embed] %>
+<% if HOST[:embed] %>
 <div id='body' style='width: 100%; text-align: center;'>
-<%= Embed.new(@db[:host][:embed]).result(params) %>
+<%= Embed.new(HOST[:embed]).result(params) %>
 </div>
 <% end %>
 

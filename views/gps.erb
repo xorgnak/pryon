@@ -2,6 +2,12 @@
 <div id='items' style='width: 100%; text-align: center;'>
 </div>
 <p style='width: 100%; text-align: center; border: thin inset grey; margin: 0;'>
-<span id='grid' style='width: 70%;'></span>
+<% if params.has_key? :user %>
+<span><%= @db[:user][:xp] %>xp</span>
+<% end %>
+<span id='grid'></span>
+<% if params.has_key? :user %>
+<span><%= @db[:user][:gp] %>gp</span>
+<% end %>
 </p>
 </div>

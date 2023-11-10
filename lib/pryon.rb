@@ -34,10 +34,14 @@ require 'wikipedia-client'
 require 'sinatra/base'
 # ai llm 
 require 'hugging_face'
+
 require 'faraday'
+
 require 'vlc-client'
 
 require 'gemoji'
+
+require 'ngrokapi'
 
 require 'date'
 
@@ -664,6 +668,11 @@ class APP < Sinatra::Base
     }
     return JSON.generate(h)
   }
+  get('/service-worker.js') {
+    content_type 'application/javascript'
+    erb :service_worker, layout: false
+  }
+ 
   # index
   get('/') {
     @db = { host: Z4[:host, request.host] }
@@ -723,7 +732,7 @@ module BOT
   @@BOT_RES = {}
   # fields for ui
   @@FIELDS = { discord: 'passport_control', phone: 'telephone', social: 'star2', store: 'convenience_store',
-               tips: 'moneybag', embed: 'information_source', img: 'frame_photo' }
+               tips: 'moneybag', ngrok: 'house', embed: 'information_source', img: 'frame_photo' }
   # standard fields for #i interface & contactor
   @@KEYS = {
     user: [ :name, :dob, :age, :city, :here, :grid, :since, :lvl, :xp, :gp, :job, :team, :union, :wins, :losses, :points, :turns, :played ],
@@ -1432,7 +1441,10 @@ module Z4;
       `#{h[:cmd]} | #{h[:bin]} #{h[:args]}`.strip
     end
   end
-   
+  @@TUNNEL = NgrokAPI::Client.new(api_key: ENV['Z4_NGROK_KEY'])
+  def self.tunnel
+    @@TUNNEL
+  end
   def self.emoji *k, &b
     o = []
     puts %[K: #{k}]
@@ -1789,6 +1801,24 @@ end
 @user = Hash.new { |h,k| h[k] = Z4[:user, k] }
 @game = Hash.new { |h,k| h[k] = Z4[:game, k] }
 
+
+NODE = @node[`cat /etc/machine-id`.strip]
+
+if ENV.has_key? "Z4_NGROK_DOMAIN"
+  HOST = @host[ENV['Z4_NGROK_DOMAIN']]
+else
+  HOST = @host['localhost']
+end
+
+NODE[:host] = HOST.index
+NODE[:boot] = Time.now.utc.to_s
+
+MENU = Z4[:host, HOST.index, :menu]
+
+if File.exist? 'config.rb'
+  load "config.rb"
+end
+
 # load runtime
 if ARGF.argv[0]
   load ARGF.argv[0]
@@ -1822,6 +1852,43 @@ end
 #}
 
 #CAL.each_pair { |k,v| File.open("reminders/host-#{k}.rem", 'w') { |f| f.write(v.to_rem.join("\n") + %[\n]) } }
+
+
+#domains = Z4.tunnel.reserved_domains.list.map { |e| e['domain'] }
+#puts %[[Z4][TUNNEL][domain] #{domains[0]}]
+
+#domain = domains[0]
+
+#edge = Z4.tunnel.edges.https.create!(
+#  description: "A Ruby Created Edge",
+#  metadata: '{"client": "ruby"}',
+#  hostports: [domain + ":443"]
+#)
+
+#puts %[[Z4][TUNNEL][edge] #{edge}]
+
+#backend = Z4.tunnel.backends.tunnel_group.create!(
+#  description: "A Ruby Created Backend",
+#  labels: {"client_example": "ruby"}
+#)
+
+#puts %[[Z4][TUNNEL][backend] #{backend.class}]
+
+#route = Z4.tunnel.edges.https_routes.create!(
+#  edge_id: edge.id,
+#  match_type: "path_prefix",
+#  match: "/",
+#  description: "Root",
+#  backend: NgrokAPI::Models::EndpointBackendMutate.new(attrs: {"enabled": true, "backend_id": backend.id}),
+#  compression: NgrokAPI::Models::EndpointCompression.new(attrs: {"enabled": true})
+#)
+#puts %[[Z4][TUNNEL][route] #{route.uri}]
+#puts %[[Z4][TUNNEL] established.]
+
+
+
+
+
 
 # Z4 Processes
 @procs = {}

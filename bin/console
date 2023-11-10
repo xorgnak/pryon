@@ -8,7 +8,7 @@ load 'lib/pryon.rb'
 here = HERE
 here.init!
 #IRB.start
-Pry.start(here)
+Pry.start()
 #          , :prompt => Pry::Prompt.new(	
 #                     "custom",	   
 #                     "my custom	prompt",

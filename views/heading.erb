@@ -1,13 +1,13 @@
 <h1 id='heading' style='width: 100%; text-align: center;'>
-<% if Z4[:host, @db[:host].index, :menu].to_h.keys.length > 0 %>
+<% if Z4[:host, HOST.index, :menu].to_h.keys.length > 0 %>
 <a class='material-icons' href='/menu'>menu</a>
 <% end %>
 <span style='width: 70%; display: inline-block;'>
-<% if @db[:host][:heading] %>
-<%= @db[:host][:heading] %>
+<% if HOST[:heading] %>
+<%= HOST[:heading] %>
 <% end %>
 </span>
-<% if @db[:host][:discord] %>
-<a class='material-icons' href='<%= @db[:host][:discord]  %>'>support_agent</a>
+<% if HOST[:discord] %>
+<a class='material-icons' href='<%= HOST[:discord]  %>'>support_agent</a>
 <% end %>
 </h1>

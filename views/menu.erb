@@ -4,7 +4,7 @@ h1 { width: 100%; }
 </style>
 <h1 style='width: 100%; text-align: center; background-color: white; color: black;'>MENU</h1>
 
-<% Z4[:host, request.host, :menu].to_h.each_pair do |k,v| %>
+<% MENU.to_h.each_pair do |k,v| %>
 <h3 style='width: 100%; text-align: center;'>
 <a href='<%= v %>'><%= k %></a>
 </h3>
