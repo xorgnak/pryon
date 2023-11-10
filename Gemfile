@@ -25,7 +25,7 @@ gem 'vlc-client'
 
 gem "net-protocol", "~> 0.2.1"
 
-gem "env", "~> 0.3.0"
+#gem "env", "~> 0.3.0"
 
 gem "gemoji"
 
