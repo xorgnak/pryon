@@ -29,6 +29,6 @@ gem "env", "~> 0.3.0"
 
 gem "gemoji"
 
-gem 'docker'
+#gem 'docker'
 
 gem 'ngrok-api'
