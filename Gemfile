@@ -23,7 +23,7 @@ gem 'vlc-client'
 
 #gem "taskjuggler", "~> 3.7"
 
-gem "net-protocol", "~> 0.2.1"
+#gem "net-protocol", "~> 0.2.1"
 
 #gem "env", "~> 0.3.0"
 
